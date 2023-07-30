@@ -43,17 +43,16 @@ public class CreateMelody : DBCommand
 
         var msg = await args.context.Channel.SendMessageAsync("Saving melody ...");
         Console.WriteLine("Saving melody");
-        
-        IProgress<float> downloadProgress = new Progress<float>(async (prog) =>
-        {
-            await msg.ModifyAsync(prop => prop.Content += ".");
-        });
+
+        IProgress<float> downloadProgress = new Progress<float>();
 
         string location = Functions.dataFolder + $"Music/Melodies/{title}.mp3";
         Directory.CreateDirectory(Functions.dataFolder + "Music/melodies");
         await ServerCom.DownloadFileAsync(file.Url,location , downloadProgress);
         
         Console.WriteLine($"Done. Saved at {location}");
+
+        await msg.ModifyAsync(a => a.Content = "Done");
 
 
         MusicInfo info =
