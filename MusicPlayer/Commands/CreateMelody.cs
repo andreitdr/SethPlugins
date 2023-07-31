@@ -15,14 +15,26 @@ public class CreateMelody : DBCommand
     
     public async void ExecuteServer(DBCommandExecutingArguments args)
     {
-        
-        Console.WriteLine(args.cleanContent);
+        if (args.arguments == null || args.arguments.Length < 4)
+        {
+            string message = "";
+            message += "Invalid arguments given. Please use the following format:\n";
+            message += "add_melody [title],[description?],[aliases],[byteSize]\n";
+            message += "title: The title of the melody\n";
+            message += "description: The description of the melody\n";
+            message += "aliases: The aliases of the melody. Use | to separate them\n";
+            message += "byteSize: The byte size of the melody. Default is 1024. ( & will use default)\n";
+
+            await args.context.Channel.SendMessageAsync(message);
+
+            return;
+        }
         string arguments = string.Join(" ", args.arguments);
         string[] split = arguments.Split(',');
 
         string title = split[0];
         string description = split[1];
-        string[] aliases = split[2].Split(' ');
+        string[]? aliases = split[2]?.Split('|') ?? null;
         string byteSize = split[3];
         int bsize;
         if (!int.TryParse(byteSize, out bsize))

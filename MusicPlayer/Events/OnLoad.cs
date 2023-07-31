@@ -10,8 +10,11 @@ public class OnLoad : DBEvent
     public string Description => "The default music commands event loader";
     public void Start(DiscordSocketClient client)
     {
-        string rootDir = Functions.dataFolder + "Music/";
-        Directory.CreateDirectory(rootDir);
-        Variables._MusicDatabase = new MusicDatabase(rootDir + "music_db.json");
+        string path1 = Functions.dataFolder + "Music/";
+        string path2 = path1 + "Music/";
+        string fileName = path1 + "music_db.json";
+        Directory.CreateDirectory(path1);
+        Directory.CreateDirectory(path2);
+        Variables._MusicDatabase = new MusicDatabase(fileName);
     }
 }
