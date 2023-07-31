@@ -15,7 +15,10 @@ public class CreateMelody : DBCommand
     
     public async void ExecuteServer(DBCommandExecutingArguments args)
     {
-        if (args.arguments == null || args.arguments.Length < 4)
+        string arguments = string.Join(" ", args.arguments);
+        string[] split = arguments.Split(',');
+        
+        if (split.Length < 4)
         {
             string message = "";
             message += "Invalid arguments given. Please use the following format:\n";
@@ -30,17 +33,6 @@ public class CreateMelody : DBCommand
             return;
         }
         
-        string arguments = string.Join(" ", args.arguments);
-        string[] split = arguments.Split(',');
-
-        string title = split[0];
-        string description = split[1];
-        string[]? aliases = split[2]?.Split('|') ?? null;
-        string byteSize = split[3];
-        int bsize;
-        if (!int.TryParse(byteSize, out bsize))
-            bsize = 1024;
-
         if (args.context.Message.Attachments.Count == 0)
         {
             await args.context.Channel.SendMessageAsync("You must upload a valid .mp3 audio or .mp4 video file !!");
@@ -53,6 +45,16 @@ public class CreateMelody : DBCommand
             await args.context.Channel.SendMessageAsync("Invalid file format !!");
             return;
         }
+        
+
+        string title = split[0];
+        string description = split[1];
+        string[]? aliases = split[2]?.Split('|') ?? null;
+        string byteSize = split[3];
+        int bsize;
+        if (!int.TryParse(byteSize, out bsize))
+            bsize = 1024;
+        
 
         var msg = await args.context.Channel.SendMessageAsync("Saving melody ...");
         Console.WriteLine("Saving melody");
