@@ -29,9 +29,9 @@ public class MusicPlayer
         if (isQueueRunning) return;
         if (Variables.audioClient is null) return;
         isQueueRunning = true;
-        CurrentlyPlaying = MusicQueue.Dequeue();
-        while (CurrentlyPlaying is not null)
+        while (MusicQueue.TryDequeue(out MusicInfo? dequeuedMusic))
         {
+            CurrentlyPlaying = dequeuedMusic;
             using (var dsAudioStream = Variables.audioClient.CreatePCMStream(AudioApplication.Mixed))
             {
                 using (var ffmpeg = CreateStream(CurrentlyPlaying.Location))
@@ -41,11 +41,10 @@ public class MusicPlayer
                 }
                 
             }
-            
-            CurrentlyPlaying = MusicQueue.Dequeue();
         }
 
         isQueueRunning = false;
+        CurrentlyPlaying = null;
     }
 
     public async Task PlayCurrentTrack(Stream DiscordVoiceChannelStream, Stream fileStreamFFMPEG, int byteSize)

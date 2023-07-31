@@ -29,6 +29,7 @@ public class CreateMelody : DBCommand
 
             return;
         }
+        
         string arguments = string.Join(" ", args.arguments);
         string[] split = arguments.Split(',');
 
