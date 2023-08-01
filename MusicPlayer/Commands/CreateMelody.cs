@@ -73,7 +73,7 @@ public class CreateMelody : DBCommand
         MusicInfo info =
             MusicInfoExtensions.CreateMusicInfo(title, location, description ?? "Unknown", aliases.ToList(), bsize);
         
-        Variables._MusicDatabase.Add(title, info);
+        Variables._MusicDatabase?.Add(title, info);
 
         EmbedBuilder builder = new EmbedBuilder();
         builder.Title = "A new music was successfully added !";
@@ -82,7 +82,7 @@ public class CreateMelody : DBCommand
         builder.AddField("Aliases", string.Join(" | ", aliases));
         await args.context.Channel.SendMessageAsync(embed: builder.Build());
 
-        await Variables._MusicDatabase.Save();
+        await Variables._MusicDatabase.SaveToFile();
 
     }
 }

@@ -27,10 +27,10 @@ namespace LevelingSystem
             if (!File.Exists(Variables.dataFolder + "Settings.txt"))
             {
                 globalSettings = new Settings { TimeToWaitBetweenMessages = 5, MaxEXP = 7, MinEXP = 1 };
-                await Functions.SaveToJsonFile<Settings>(Variables.dataFolder + "Settings.txt", globalSettings);
+                await JsonManager.SaveToJsonFile<Settings>(Variables.dataFolder + "Settings.txt", globalSettings);
             }
             else
-                globalSettings = await Functions.ConvertFromJson<Settings>(Variables.dataFolder + "Settings.txt");
+                globalSettings = await JsonManager.ConvertFromJson<Settings>(Variables.dataFolder + "Settings.txt");
 
             if (!await Variables.database.TableExistsAsync("Levels"))
                 await Variables.database.CreateTableAsync("Levels", "UserID VARCHAR(128)", "Level INT", "EXP INT");
@@ -45,7 +45,7 @@ namespace LevelingSystem
 
         private async Task ClientOnMessageReceived(SocketMessage arg)
         {
-            if (arg.Author.IsBot || arg.IsTTS || arg.Content.StartsWith(Config.Data["prefix"]) || Variables.waitingList.Contains(arg.Author.Id)) return;
+            if (arg.Author.IsBot || arg.IsTTS || arg.Content.StartsWith(Config.AppSettings["prefix"]) || Variables.waitingList.Contains(arg.Author.Id)) return;
             string userID = arg.Author.Id.ToString();
 
             object[] userData = await Variables.database.ReadDataArrayAsync($"SELECT * FROM Levels WHERE userID='{userID}'");

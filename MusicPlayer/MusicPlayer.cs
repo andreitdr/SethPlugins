@@ -9,7 +9,7 @@ public class MusicPlayer
 {
     private static int defaultByteSize = 1024;
     
-    public Queue<MusicInfo> MusicQueue { get; init; }
+    public Queue<MusicInfo> MusicQueue { get; private set; }
 
     public bool isPaused { get; private set; }
     public bool isPlaying { get; private set; }
@@ -45,6 +45,24 @@ public class MusicPlayer
 
         isQueueRunning = false;
         CurrentlyPlaying = null;
+    }
+
+    public void Loop(int numberOfTimes)
+    {
+        if(CurrentlyPlaying is null) return;
+        
+        Queue<MusicInfo> tempQueue = new Queue<MusicInfo>();
+        for (int i = 0; i < numberOfTimes; i++)
+        {
+            tempQueue.Enqueue(CurrentlyPlaying);
+        }
+        
+        foreach (var musicInfo in MusicQueue)
+        {
+            tempQueue.Enqueue(musicInfo);
+        }
+        
+        this.MusicQueue = tempQueue;
     }
 
     public async Task PlayCurrentTrack(Stream DiscordVoiceChannelStream, Stream fileStreamFFMPEG, int byteSize)
