@@ -24,20 +24,9 @@ public class Loop : DBSlashCommand
             return;    
         }
         
-        if(context.Data.Options.Count != 1)
-        {
-            context.RespondAsync("You need to specify how many times to loop the song");
-            return;
-        }
-        
-        var times = context.Data.Options.First().Value?.ToString();
-        if(times == null)
-        {
-            times = "1";
-            return;
-        }
-        
-        if(!int.TryParse(times, out var timesToLoop))
+        string times = context.Data.Options.FirstOrDefault()?.Value.ToString() ?? "1";
+
+        if(!int.TryParse(times, out int timesToLoop))
         {
             context.RespondAsync("Invalid number");
             return;
@@ -48,7 +37,7 @@ public class Loop : DBSlashCommand
             context.RespondAsync("You need to specify a number greater than 0");
             return;
         }
-        
+
         Variables._MusicPlayer.Loop(timesToLoop);
         
         context.RespondAsync($"Looping {Variables._MusicPlayer.CurrentlyPlaying.Title} {timesToLoop} times. Check the queue to see the progress");
