@@ -24,7 +24,7 @@ public class SearchMelody : DBCommand
         }
 
         List<MusicInfo>? info = Variables._MusicDatabase.GetMusicInfoList(title);
-        if (info == null)
+        if (info == null || info.Count == 0)
         {
             args.context.Channel.SendMessageAsync("No melody with that name or alias was found");
             return;

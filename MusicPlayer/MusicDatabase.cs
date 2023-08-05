@@ -30,16 +30,21 @@ public class MusicDatabase : SettingsDictionary<string, MusicInfo>
         return this.FirstOrDefault(kvp => kvp.Key.Contains(searchQuery, StringComparison.InvariantCultureIgnoreCase) ||
                                           kvp.Value.Aliases.Any(alias => alias.Contains(searchQuery, StringComparison.InvariantCultureIgnoreCase))).Value;
     }
-
+    
+    /// <summary>
+    /// Get a list of music info that match the search query. Returns null if an error occurred, or empty list if no match was found.
+    /// </summary>
+    /// <param name="searchQuery">The search query</param>
+    /// <returns>null if an error occured, otherwise a list with songs that match the search query. If no song match the list is empty</returns>
     public List<MusicInfo>? GetMusicInfoList(string searchQuery)
     {
         try
         {
-            return this.Where(kvp => kvp.Key.Contains(searchQuery, StringComparison.InvariantCultureIgnoreCase) ||
-                                     kvp.Value.Aliases.Any(alias => alias.Contains(searchQuery, StringComparison.InvariantCultureIgnoreCase))
-                             )
-                       .Select(item => item.Value).ToList();
-
+            return this.Where(kvp => 
+                    kvp.Key.Contains(searchQuery, StringComparison.InvariantCultureIgnoreCase) ||
+                    kvp.Value.Aliases.Any(alias => alias.Contains(searchQuery, StringComparison.InvariantCultureIgnoreCase))
+                )
+                .Select(item => item.Value).ToList();
         }
         catch(Exception ex)
         {
