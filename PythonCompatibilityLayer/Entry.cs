@@ -1,4 +1,6 @@
-﻿using Discord.WebSocket;
+﻿using Discord.Commands;
+using Discord.WebSocket;
+using PluginManager;
 using PluginManager.Interfaces;
 using PluginManager.Others;
 using Python.Runtime;
@@ -16,24 +18,33 @@ public class Entry : DBEvent
             throw new Exception("PythonCompatibilityLayer: Python DLL not found. Please add it to the config file.\nUse the command \"registercmd python_dll <path>\" to register it.");
         Runtime.PythonDLL = Variables.Commands["python_dll"];
         
-        client.MessageReceived += async message =>
+        client.MessageReceived += async Message =>
         {
-            if (message.Author.IsBot) return;
-            DBCommandExecutingArguments args = new(message as SocketUserMessage, client);
-            
-            Console.WriteLine($"PythonCompatibilityLayer: Received command {args.commandUsed}");
+            if (Message.Author.IsBot)
+                return;
 
-            if (Variables.Commands.ContainsKey(args.commandUsed))
+            if (Message as SocketUserMessage == null)
+                return;
+
+            var message = Message as SocketUserMessage;
+
+            if (message is null)
+                return;
+
+            var argPos = 0;
+
+            if (!message.Content.StartsWith(Config.DiscordBot.botPrefix) && !message.HasMentionPrefix(client.CurrentUser, ref argPos))
+                return;
+            
+            DBCommandExecutingArguments args = new(message as SocketUserMessage, client);
+            if (Variables.Commands.TryGetValue(args.commandUsed, out var command))
             {
                 PythonEngine.Initialize();
+                
                 using (Py.GIL())
                 {
-                    Console.WriteLine($"PythonCompatibilityLayer: Command found. {args.commandUsed}");
-                    Console.WriteLine($"Imporing : {Variables.Commands[args.commandUsed]}");
-                    dynamic scr = Py.Import(Variables.Commands[args.commandUsed]);
-                    Console.WriteLine($"PythonCompatibilityLayer: Script imported. {Variables.Commands[args.commandUsed]}");
-                    dynamic result = scr.hello_world();
-                    Console.WriteLine(result);
+                    dynamic scr = Py.Import(command);
+                    dynamic result = scr.Execute(args.arguments);
                     await message.Channel.SendMessageAsync(result.ToString());
                 }
                 

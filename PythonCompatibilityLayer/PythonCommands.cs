@@ -5,4 +5,5 @@ public class PythonCommands : PluginManager.Others.SettingsDictionary<string, st
     public PythonCommands(string? file) : base(file)
     {
     }
+    
 }
