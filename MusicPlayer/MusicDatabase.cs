@@ -46,6 +46,7 @@ public class MusicDatabase : SettingsDictionary<string, MusicInfo>
                 )
                 .Select(item => item.Value).ToList();
         }
+        
         catch(Exception ex)
         {
             Console.WriteLine(ex.ToString());

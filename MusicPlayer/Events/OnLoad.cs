@@ -11,10 +11,8 @@ public class OnLoad : DBEvent
     public void Start(DiscordSocketClient client)
     {
         string path1 = Functions.dataFolder + "Music/";
-        string path2 = path1 + "Music/";
         string fileName = path1 + "music_db.json";
         Directory.CreateDirectory(path1);
-        Directory.CreateDirectory(path2);
         Variables._MusicDatabase = new MusicDatabase(fileName);
     }
 }
