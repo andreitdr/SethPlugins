@@ -27,8 +27,8 @@ public class Skip : DBSlashCommand
 
         string? melodyTitle = Variables._MusicPlayer.CurrentlyPlaying.Title;
 
-        var message = await context.Channel.SendMessageAsync($"Skipping {melodyTitle} ...");
+        await context.RespondAsync($"Skipping {melodyTitle} ...");
         Variables._MusicPlayer.Skip();
-        await message.ModifyAsync(x => x.Content = $"Skipped {melodyTitle}");
+        await context.ModifyOriginalResponseAsync(x => x.Content = $"Skipped {melodyTitle}");
     }
 }

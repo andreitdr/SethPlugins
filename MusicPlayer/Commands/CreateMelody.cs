@@ -62,7 +62,7 @@ public class CreateMelody : DBCommand
         IProgress<float> downloadProgress = new Progress<float>();
 
         string location = Functions.dataFolder + $"Music/Melodies/{title}.mp3";
-        Directory.CreateDirectory(Functions.dataFolder + "Music/melodies");
+        Directory.CreateDirectory(Functions.dataFolder + "Music/Melodies");
         await ServerCom.DownloadFileAsync(file.Url,location , downloadProgress);
         
         Console.WriteLine($"Done. Saved at {location}");

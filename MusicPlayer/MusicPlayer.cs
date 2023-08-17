@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Discord.Audio;
 using PluginManager;
 using PluginManager.Others;
+using PluginManager.Others.Logger;
 
 namespace MusicPlayer;
 
@@ -26,23 +27,41 @@ public class MusicPlayer
 
     public async Task PlayQueue()
     {
-        if (isQueueRunning) return;
-        if (Variables.audioClient is null) return;
+        if (isQueueRunning)
+        {
+            Config.Logger.Log("Another queue is running !", LogLevel.WARNING);
+            return;
+        }
+        
+        if (Variables.audioClient is null)
+        {
+            Config.Logger.Log("Audio Client is null", LogLevel.WARNING);
+            return;
+        }
+        
         isQueueRunning = true;
+        
+        
         while (MusicQueue.TryDequeue(out MusicInfo? dequeuedMusic))
         {
             CurrentlyPlaying = dequeuedMusic;
-            using (var dsAudioStream = Variables.audioClient.CreatePCMStream(AudioApplication.Mixed))
+            using (var dsAudioStream = Variables.audioClient.CreatePCMStream(AudioApplication.Voice))
             {
                 using (var ffmpeg = CreateStream(CurrentlyPlaying.Location))
                 {
-                    using (var ffmpeg_out = ffmpeg.StandardOutput.BaseStream)
-                        await PlayCurrentTrack(dsAudioStream, ffmpeg_out, CurrentlyPlaying.ByteSize ?? defaultByteSize);
+                    if (ffmpeg is null)
+                    {
+                        Config.Logger.Log($"Failed to start ffmpeg process. FFMPEG is missing or the {CurrentlyPlaying.Location} has an invalid format.", LogLevel.ERROR);
+                        continue;
+                    }
+                    using (var ffmpegOut = ffmpeg.StandardOutput.BaseStream)
+                    {
+                        await PlayCurrentTrack(dsAudioStream, ffmpegOut, CurrentlyPlaying.ByteSize ?? defaultByteSize);
+                    }
                 }
                 
             }
         }
-
         isQueueRunning = false;
         CurrentlyPlaying = null;
     }
@@ -125,9 +144,15 @@ public class MusicPlayer
         this.isPlaying = false;
     }
 
-    private static Process CreateStream(string path)
+    private static Process? CreateStream(string path)
     {
-        return Process.Start(new ProcessStartInfo { FileName = "ffmpeg", Arguments = $"-hide_banner -loglevel panic -i \"{path}\" -ac 2 -f s16le -ar 48000 pipe:1", UseShellExecute = false, RedirectStandardOutput = true });
+        return Process.Start(new ProcessStartInfo
+        {
+            FileName = "./ffmpeg", 
+            Arguments = $"-hide_banner -loglevel panic -i \"{path}\" -ac 2 -f s16le -ar 48000 pipe:1", 
+            UseShellExecute = false,
+            RedirectStandardOutput = true
+        });
     }
 
     public void Stop()

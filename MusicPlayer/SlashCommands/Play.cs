@@ -57,10 +57,15 @@ public class Play : DBSlashCommand
         if (Variables.audioClient is null)
         {
             Variables.audioClient = await voiceChannel.ConnectAsync(true); // self deaf
-            Variables._MusicPlayer ??= new MusicPlayer();
         }
+        
+        Variables._MusicPlayer ??= new MusicPlayer();
 
-        Variables._MusicPlayer.Enqueue(melodyName);
+        if (!Variables._MusicPlayer.Enqueue(melodyName))
+        {
+            await context.RespondAsync("Failed to enqueue your request. Something went wrong !");
+            return;
+        }
         await context.RespondAsync("Enqueued your request");
 
         await Variables._MusicPlayer.PlayQueue(); //start queue
