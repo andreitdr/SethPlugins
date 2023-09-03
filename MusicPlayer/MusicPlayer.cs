@@ -45,7 +45,7 @@ public class MusicPlayer
         while (MusicQueue.TryDequeue(out MusicInfo? dequeuedMusic))
         {
             CurrentlyPlaying = dequeuedMusic;
-            using (var dsAudioStream = Variables.audioClient.CreatePCMStream(AudioApplication.Voice))
+            using (var dsAudioStream = Variables.audioClient.CreatePCMStream(AudioApplication.Mixed))
             {
                 using (var ffmpeg = CreateStream(CurrentlyPlaying.Location))
                 {
@@ -148,7 +148,7 @@ public class MusicPlayer
     {
         return Process.Start(new ProcessStartInfo
         {
-            FileName = "./ffmpeg", 
+            FileName = "ffmpeg", 
             Arguments = $"-hide_banner -loglevel panic -i \"{path}\" -ac 2 -f s16le -ar 48000 pipe:1", 
             UseShellExecute = false,
             RedirectStandardOutput = true
