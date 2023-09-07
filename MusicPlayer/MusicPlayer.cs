@@ -144,6 +144,11 @@ public class MusicPlayer
         this.isPlaying = false;
     }
 
+    public void SetVolume(float volume)
+    {
+        // set volume
+    }
+
     private static Process? CreateStream(string path)
     {
         return Process.Start(new ProcessStartInfo
