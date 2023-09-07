@@ -18,9 +18,11 @@ public class OnVoiceRemoved : DBEvent
         {
             if (user.Id == client.CurrentUser.Id && newState.VoiceChannel == null)
             {
+                Variables._MusicPlayer?.MusicQueue.Clear();
+                Variables._MusicPlayer?.Skip();
+                Variables._MusicPlayer?.Stop();
                 await Variables.audioClient!.StopAsync();
                 Variables.audioClient = null;
-                Variables._MusicPlayer?.Stop();
                 Variables._MusicPlayer = null;
                 
                 Config.Logger.Log("Bot left voice channel.", LogLevel.INFO);
