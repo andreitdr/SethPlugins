@@ -3,7 +3,7 @@
 using PluginManager;
 using PluginManager.Database;
 using PluginManager.Interfaces;
-using PluginManager.Others;
+using static LevelingSystem.Variables;
 
 namespace LevelingSystem
 {
@@ -12,22 +12,20 @@ namespace LevelingSystem
         public string Name => "Leveling System Event Handler";
         public string Description => "The Leveling System Event Handler";
 
-        internal static Settings globalSettings = new();
-
 
         public async void Start(DiscordSocketClient client)
         {
 
             Directory.CreateDirectory(Variables.dataFolder);
             await Task.Delay(200);
-            Variables.database = new SqlDatabase(Variables.dataFolder + "/Users.dat");
+            Variables.database = new SqlDatabase(Variables.dataFolder + "Users.db");
             await Variables.database.Open();
 
 
             if (!File.Exists(Variables.dataFolder + "Settings.txt"))
             {
-                globalSettings = new Settings { TimeToWaitBetweenMessages = 5, MaxEXP = 7, MinEXP = 1 };
-                await JsonManager.SaveToJsonFile<Settings>(Variables.dataFolder + "Settings.txt", globalSettings);
+                globalSettings = new Settings { SecondsToWaitBetweenMessages = 5, MaxEXP = 7, MinEXP = 1 };
+                await JsonManager.SaveToJsonFile(Variables.dataFolder + "Settings.txt", globalSettings);
             }
             else
                 globalSettings = await JsonManager.ConvertFromJson<Settings>(Variables.dataFolder + "Settings.txt");
@@ -45,7 +43,12 @@ namespace LevelingSystem
 
         private async Task ClientOnMessageReceived(SocketMessage arg)
         {
-            if (arg.Author.IsBot || arg.IsTTS || arg.Content.StartsWith(Config.AppSettings["prefix"]) || Variables.waitingList.Contains(arg.Author.Id)) return;
+            if (arg.Author.IsBot || arg.IsTTS || arg.Content.StartsWith(Config.AppSettings["prefix"])) 
+                return;
+           
+            if(Variables.waitingList.ContainsKey(arg.Author.Id) && Variables.waitingList[arg.Author.Id] > DateTime.Now.AddSeconds(-globalSettings.SecondsToWaitBetweenMessages))
+                return;
+            
             string userID = arg.Author.Id.ToString();
 
             object[] userData = await Variables.database.ReadDataArrayAsync($"SELECT * FROM Levels WHERE userID='{userID}'");
@@ -67,15 +70,8 @@ namespace LevelingSystem
                 await arg.Channel.SendMessageAsync($"{arg.Author.Mention} has leveled up to level {level + 1}!");
             }
             else await Variables.database.ExecuteAsync($"UPDATE Levels SET EXP={exp + random} WHERE UserID='{userID}'");
-
-            Thread t = new Thread(() =>
-            {
-                Thread.Sleep(globalSettings.TimeToWaitBetweenMessages * 1000);
-                Variables.waitingList.Add(arg.Author.Id);
-            });
-
-            t.Start();
-
+            
+            Variables.waitingList.Add(arg.Author.Id, DateTime.Now);
         }
 
     }

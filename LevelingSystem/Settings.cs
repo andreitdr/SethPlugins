@@ -5,15 +5,16 @@ namespace LevelingSystem
 {
     public class Settings
     {
-        public int TimeToWaitBetweenMessages { get; set; }
+        public int SecondsToWaitBetweenMessages { get; set; }
         public int MinEXP { get; set; }
         public int MaxEXP { get; set; }
     }
 
     internal class Variables
     {
-        internal static readonly string dataFolder = Path.Combine(Functions.dataFolder, "LevelingSystem");
+        internal static readonly string dataFolder = Functions.dataFolder + "LevelingSystem/";
         internal static SqlDatabase? database;
-        internal static List<ulong> waitingList = new List<ulong>();
+        internal static Dictionary<ulong, DateTime> waitingList = new();
+        internal static Settings globalSettings = new();
     }
 }
