@@ -5,7 +5,7 @@ using PluginManager.Others;
 
 namespace MusicPlayer.Commands;
 
-public class CreateMelody : DBCommand
+public class AddMelody : DBCommand
 {
     public string Command => "add_melody";
     public List<string>? Aliases => new List<string>() { "madd" };

@@ -25,7 +25,7 @@ public class OnVoiceRemoved : DBEvent
                 Variables.audioClient = null;
                 Variables._MusicPlayer = null;
                 
-                Config.Logger.Log("Bot left voice channel.", LogLevel.INFO);
+                Config.Logger.Log("Bot left voice channel.", source: typeof(OnVoiceRemoved), type: LogType.INFO);
             }
             
         };

@@ -28,9 +28,12 @@ public static class MusicInfoExtensions
     {
         EmbedBuilder builder = new EmbedBuilder();
         builder.Color = embedColor ?? Color.Default;
-        builder.WithTitle("Title: " + musicInfo.Title);
-        builder.WithDescription("Description: " + musicInfo.Description);
-        builder.AddField("Aliases", string.Join(", ", musicInfo.Aliases));
+        builder.WithTitle(musicInfo.Title);
+        builder.WithDescription(musicInfo.Description);
+        if(musicInfo.Aliases != null)
+            builder.AddField("Aliases", string.Join(", ", musicInfo.Aliases));
+        else 
+            builder.AddField("Aliases", "None");
         builder.AddField("Location", musicInfo.Location);
         builder.AddField("ByteSize", musicInfo.ByteSize);
         return builder.Build();

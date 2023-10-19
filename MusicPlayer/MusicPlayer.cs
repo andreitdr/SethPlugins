@@ -29,13 +29,13 @@ public class MusicPlayer
     {
         if (isQueueRunning)
         {
-            Config.Logger.Log("Another queue is running !", LogLevel.WARNING);
+            Config.Logger.Log("Another queue is running !", source: typeof(MusicPlayer), type: LogType.WARNING);
             return;
         }
         
         if (Variables.audioClient is null)
         {
-            Config.Logger.Log("Audio Client is null", LogLevel.WARNING);
+            Config.Logger.Log("Audio Client is null", source: typeof(MusicPlayer), type: LogType.WARNING);
             return;
         }
         
@@ -51,7 +51,7 @@ public class MusicPlayer
                 {
                     if (ffmpeg is null)
                     {
-                        Config.Logger.Log($"Failed to start ffmpeg process. FFMPEG is missing or the {CurrentlyPlaying.Location} has an invalid format.", LogLevel.ERROR);
+                        Config.Logger.Log($"Failed to start ffmpeg process. FFMPEG is missing or the {CurrentlyPlaying.Location} has an invalid format.", source: typeof(MusicPlayer), type: LogType.ERROR);
                         continue;
                     }
                     using (var ffmpegOut = ffmpeg.StandardOutput.BaseStream)
@@ -106,7 +106,7 @@ public class MusicPlayer
             }
             catch (Exception ex)
             {
-                Config.Logger.Error(ex);
+                Config.Logger.Log(ex, source: typeof(MusicPlayer));
                 break;
             }
         }

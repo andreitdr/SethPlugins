@@ -43,7 +43,7 @@ public class Play : DBSlashCommand
         if (user is null)
         {
             await context.RespondAsync("Failed to get user data from channel ! Check error log at " + DateTime.Now.ToLongTimeString());
-            Config.Logger.Log("User is null while trying to convert from context.User to IGuildUser.", LogLevel.ERROR);
+            Config.Logger.Log("User is null while trying to convert from context.User to IGuildUser.", source: typeof(Play), type: LogType.ERROR );
             return;
         }
 
