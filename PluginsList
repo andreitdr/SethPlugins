@@ -2,4 +2,4 @@ Leveling System,The official leveling system plugin,Plugin,https://github.com/an
 Music Player,The official music player plugin,Plugin,https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/MusicPlayer.dll,Windows,https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/Windows
 Music Player,The official music player plugin,Plugin,https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/MusicPlayer.dll,Linux,https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/Linux
 Python Scripts Loader,Load python scripts and execute them,Plugin,https://github.com/andreitdr/SethPlugins/raw/releases/PythonCompatibilityLayer/PythonCompatibilityLayer.dll,Windows,https://github.com/andreitdr/SethPlugins/raw/releases/PythonCompatibilityLayer/Windows
-Test,Test plugin,Plugin,https://github.com/andreitdr/SethPlugins/raw/releases/LevelingSystem/LevelingSystem.dll,Windows/Linux,https://github.com/andreitdr/SethPlugins/raw/test/multiple_downloads
+Test,Test plugin,Plugin,https://github.com/andreitdr/SethPlugins/raw/releases/LevelingSystem/LevelingSystem.dll,Windows/Linux,https://github.com/andreitdr/SethPlugins/raw/tests/multiple_downloads
