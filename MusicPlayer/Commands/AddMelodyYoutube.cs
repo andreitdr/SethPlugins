@@ -28,6 +28,12 @@ public class AddMelodyYoutube : DBCommand
             await args.context.Channel.SendMessageAsync("Invalid URL given. Please use the following format:\nadd_melody_youtube [URL]");
             return;
         }
+
+        if (args.arguments.Length <= 1)
+        {
+            await args.Channel.SendMessageAsync("Please specify at least one alias for the melody !");
+            return;
+        }
         
         var msg = await args.context.Channel.SendMessageAsync("Saving melody ...");
         
@@ -39,14 +45,8 @@ public class AddMelodyYoutube : DBCommand
             return;
         }
         
-        List<string>? aliases = null;
-        if (args.arguments.Length > 1)
-        {
-            string joinedAliases = string.Join(" ", args.arguments.Skip(1));
-            aliases = joinedAliases.Split('|').ToList();
-        }
-        else 
-            aliases = new List<string>() { title.Split(' ')[0] };
+        string joinedAliases = string.Join(" ", args.arguments.Skip(1));
+        List<string> aliases = joinedAliases.Split('|').ToList();
 
 
         if (Variables._MusicDatabase.ContainsMelodyWithNameOrAlias(title))

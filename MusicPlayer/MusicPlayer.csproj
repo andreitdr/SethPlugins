@@ -10,4 +10,16 @@
       <ProjectReference Include="..\..\SethDiscordBot\PluginManager\PluginManager.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="libs\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="libs\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="libs\**" />
+    </ItemGroup>
+
 </Project>
