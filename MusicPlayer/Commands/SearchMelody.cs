@@ -13,7 +13,7 @@ public class SearchMelody : DBCommand
     public string        Usage        => "search_melody [melody name OR one of its aliases]";
     public bool          requireAdmin => false;
 
-    public void ExecuteServer(DBCommandExecutingArguments args)
+    public void ExecuteServer(DbCommandExecutingArguments args)
     {
         string title = string.Join(" ", args.arguments);
         

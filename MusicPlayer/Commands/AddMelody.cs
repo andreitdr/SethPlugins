@@ -13,7 +13,7 @@ public class AddMelody : DBCommand
     public string Usage => "add_melody [title],[description?],[aliases],[byteSize]";
     public bool requireAdmin => false;
     
-    public async void ExecuteServer(DBCommandExecutingArguments args)
+    public async void ExecuteServer(DbCommandExecutingArguments args)
     {
         string arguments = string.Join(" ", args.arguments);
         string[] split = arguments.Split(',');

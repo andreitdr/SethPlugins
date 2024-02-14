@@ -36,7 +36,7 @@ public class Entry : DBEvent
             if (!message.Content.StartsWith(Config.DiscordBot.botPrefix) && !message.HasMentionPrefix(client.CurrentUser, ref argPos))
                 return;
             
-            DBCommandExecutingArguments args = new(message as SocketUserMessage, client);
+            DbCommandExecutingArguments args = new(message as SocketUserMessage, client);
             if (Variables.Commands.TryGetValue(args.commandUsed, out var command))
             {
                 PythonEngine.Initialize();

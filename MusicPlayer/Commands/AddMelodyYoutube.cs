@@ -12,7 +12,7 @@ public class AddMelodyYoutube : DBCommand
     public string Usage => "add_melody_youtube [URL] <alias1|alias2|...>";
     public bool requireAdmin => true;
 
-    public async void ExecuteServer(DBCommandExecutingArguments args)
+    public async void ExecuteServer(DbCommandExecutingArguments args)
     {
         if (args.arguments is null)
         {

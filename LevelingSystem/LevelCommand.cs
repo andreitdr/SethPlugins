@@ -18,7 +18,7 @@ internal class LevelCommand : DBCommand
 
     public bool requireAdmin => false;
 
-    public async void ExecuteServer(DBCommandExecutingArguments args)
+    public async void ExecuteServer(DbCommandExecutingArguments args)
     {
         object[] user = await Variables.database.ReadDataArrayAsync($"SELECT * FROM Levels WHERE UserID='{args.context.Message.Author.Id}'");
         if (user is null)
