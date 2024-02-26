@@ -13,7 +13,7 @@
     "HasDependencies": false
   },
   {
-    "Name": "Music Player",
+    "Name": "Music Player (Windows)",
     "Version": {
       "Major": 0,
       "Minor": 0,
@@ -47,7 +47,7 @@
     "HasDependencies": true
   },
   {
-    "Name": "Music Player",
+    "Name": "Music Player (Linux)",
     "Version": {
       "Major": 0,
       "Minor": 0,
