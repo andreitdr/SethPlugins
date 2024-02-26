@@ -9,7 +9,7 @@
     "DownLoadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/LevelingSystem/LevelingSystem.dll",
     "Description": "A simple leveling system for your server",
     "Dependencies": [],
-    "SupportedOS": 3,
+    "SupportedOS": 5,
     "HasDependencies": false
   },
   {
@@ -73,7 +73,7 @@
         "DownloadLocation": "yt-dlp"
       }
     ],
-    "SupportedOS": 2,
+    "SupportedOS": 4,
     "HasDependencies": true
   }
 ]
