@@ -1,0 +1,79 @@
+[
+  {
+    "Name": "Leveling System",
+    "Version": {
+      "Major": 0,
+      "Minor": 0,
+      "Patch": 1
+    },
+    "DownLoadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/LevelingSystem/LevelingSystem.dll",
+    "Description": "A simple leveling system for your server",
+    "Dependencies": [],
+    "SupportedOS": 3,
+    "HasDependencies": false
+  },
+  {
+    "Name": "Music Player",
+    "Version": {
+      "Major": 0,
+      "Minor": 0,
+      "Patch": 1
+    },
+    "DownLoadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/MusicPlayer.dll",
+    "Description": "A simple music player for your server",
+    "Dependencies": [
+      {
+        "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/ffmpeg.exe",
+        "DownloadLocation": "ffmpeg.exe"
+      },
+      {
+        "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/libopus.dll",
+        "DownloadLocation": "libopus.dll"
+      },
+      {
+        "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/libsodium.dll",
+        "DownloadLocation": "libsodium.dll"
+      },
+      {
+        "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/opus.dll",
+        "DownloadLocation": "opus.dll"
+      },
+      {
+        "DownloadLink": "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_x86.exe",
+        "DownloadLocation": "yt-dlp_x86.exe"
+      }
+    ],
+    "SupportedOS": 1,
+    "HasDependencies": true
+  },
+  {
+    "Name": "Music Player",
+    "Version": {
+      "Major": 0,
+      "Minor": 0,
+      "Patch": 1
+    },
+    "DownLoadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/MusicPlayer.dll",
+    "Description": "A simple music player for your server",
+    "Dependencies": [
+      {
+        "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/linux/ffmpeg",
+        "DownloadLocation": "ffmpeg"
+      },
+      {
+        "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/linux/libopus.so",
+        "DownloadLocation": "libopus.so"
+      },
+      {
+        "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/linux/libsodium.so",
+        "DownloadLocation": "libsodium.so"
+      },
+      {
+        "DownloadLink": "https://github.com/yt-dlp/yt-dlp/releases/download/2023.10.13/yt-dlp",
+        "DownloadLocation": "yt-dlp"
+      }
+    ],
+    "SupportedOS": 2,
+    "HasDependencies": true
+  }
+]
