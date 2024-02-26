@@ -40,7 +40,7 @@
       },
       {
         "DownloadLink": "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_x86.exe",
-        "DownloadLocation": "yt-dlp_x86.exe"
+        "DownloadLocation": "yt-dlp.exe"
       }
     ],
     "SupportedOS": 1,
