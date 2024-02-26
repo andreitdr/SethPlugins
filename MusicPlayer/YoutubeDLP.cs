@@ -21,10 +21,15 @@ public class YoutubeDLP
                 if (args.Data.StartsWith("[ExtractAudio] Destination: "))
                 {
                     title = args.Data.Replace("[ExtractAudio] Destination: ", "").Replace(".mp3", "");
+                    title = title.Replace("\\", "/");
                     title = title.Split('/').Last().Replace(".mp3", "").TrimEnd();
 
                     Console.WriteLine("Output title: " + title);
+
+                    return;
                 }
+                
+                Console.WriteLine(args.Data);
             }
         };
 
