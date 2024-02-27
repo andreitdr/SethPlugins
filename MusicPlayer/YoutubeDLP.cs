@@ -8,12 +8,12 @@ public class YoutubeDLP
     public static async Task<string?> DownloadMelody(string url)
     {
         Console.WriteLine("Downloading melody: " + url);
-        Process process = new Process();
-        process.StartInfo.FileName = "./yt-dlp";
+        var process = new Process();
+        process.StartInfo.FileName  = "./yt-dlp";
         process.StartInfo.Arguments = $"-x --force-overwrites -o \"{Functions.dataFolder}Music/Melodies/%(title)s.%(ext)s\" --audio-format mp3 {url}";
-        
+
         process.StartInfo.RedirectStandardOutput = true;
-        string title = "";
+        var title = "";
         process.OutputDataReceived += (sender, args) =>
         {
             if (args.Data != null)
@@ -28,7 +28,7 @@ public class YoutubeDLP
 
                     return;
                 }
-                
+
                 Console.WriteLine(args.Data);
             }
         };
@@ -37,7 +37,7 @@ public class YoutubeDLP
         Console.WriteLine("Waiting for process to exit ...");
         process.BeginOutputReadLine();
         await process.WaitForExitAsync();
-        
+
         return title ?? null;
     }
 }

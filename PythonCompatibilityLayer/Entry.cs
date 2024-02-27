@@ -7,17 +7,17 @@ using Python.Runtime;
 
 namespace PythonCompatibilityLayer;
 
-public class Entry : DBEvent
+public class Entry: DBEvent
 {
     public string Name => "PythonCompatibilityLayer";
     public string Description => "A compatibility layer for Python plugins.";
     public void Start(DiscordSocketClient client)
     {
         Console.WriteLine("PythonCompatibilityLayer: Starting Python runtime.");
-        if(!Variables.Commands.ContainsKey("python_dll"))
+        if (!Variables.Commands.ContainsKey("python_dll"))
             throw new Exception("PythonCompatibilityLayer: Python DLL not found. Please add it to the config file.\nUse the command \"registercmd python_dll <path>\" to register it.");
         Runtime.PythonDLL = Variables.Commands["python_dll"];
-        
+
         client.MessageReceived += async Message =>
         {
             if (Message.Author.IsBot)
@@ -35,22 +35,22 @@ public class Entry : DBEvent
 
             if (!message.Content.StartsWith(Config.DiscordBot.botPrefix) && !message.HasMentionPrefix(client.CurrentUser, ref argPos))
                 return;
-            
+
             DbCommandExecutingArguments args = new(message as SocketUserMessage, client);
             if (Variables.Commands.TryGetValue(args.commandUsed, out var command))
             {
                 PythonEngine.Initialize();
-                
+
                 using (Py.GIL())
                 {
-                    dynamic scr = Py.Import(command);
-                    dynamic result = scr.Execute(args.arguments);
+                    dynamic scr    = Py.Import(command);
+                    var     result = scr.Execute(args.arguments);
                     await message.Channel.SendMessageAsync(result.ToString());
                 }
-                
+
                 PythonEngine.Shutdown();
 
-                
+
             }
         };
         Console.WriteLine("PythonCompatibilityLayer: Python runtime started.");

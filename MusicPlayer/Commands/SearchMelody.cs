@@ -4,19 +4,19 @@ using PluginManager.Others;
 
 namespace MusicPlayer.Commands;
 
-public class SearchMelody : DBCommand
+public class SearchMelody: DBCommand
 {
 
-    public string        Command      => "search_melody";
-    public List<string>? Aliases      => null;
-    public string        Description  => "Search for a melody in the database";
-    public string        Usage        => "search_melody [melody name OR one of its aliases]";
-    public bool          requireAdmin => false;
+    public string Command => "search_melody";
+    public List<string>? Aliases => null;
+    public string Description => "Search for a melody in the database";
+    public string Usage => "search_melody [melody name OR one of its aliases]";
+    public bool requireAdmin => false;
 
     public void ExecuteServer(DbCommandExecutingArguments args)
     {
-        string title = string.Join(" ", args.arguments);
-        
+        var title = string.Join(" ", args.arguments);
+
         if (string.IsNullOrWhiteSpace(title))
         {
             args.context.Channel.SendMessageAsync("You need to specify a melody name");
@@ -30,7 +30,7 @@ public class SearchMelody : DBCommand
             return;
         }
 
-        if(info.Count > 1)
+        if (info.Count > 1)
             args.context.Channel.SendMessageAsync(embed: info.ToEmbed(Color.DarkOrange));
         else
             args.context.Channel.SendMessageAsync(embed: info[0].ToEmbed(Color.DarkOrange));

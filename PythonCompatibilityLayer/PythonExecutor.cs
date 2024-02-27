@@ -7,9 +7,9 @@ public class PythonExecutor
     public static dynamic ExecuteScript(string cmd, object[] args)
     {
         if (!Variables.Commands.ContainsKey(cmd)) return "Command not found.";
-        string scriptFile = Variables.Commands[cmd];
-        string script = File.ReadAllText(scriptFile);
-        dynamic result = PythonEngine.Eval(string.Format(script, args));
+        var     scriptFile = Variables.Commands[cmd];
+        var     script     = File.ReadAllText(scriptFile);
+        dynamic result     = PythonEngine.Eval(string.Format(script, args));
         return result;
     }
 

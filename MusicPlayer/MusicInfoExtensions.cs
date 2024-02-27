@@ -20,28 +20,32 @@ public static class MusicInfoExtensions
     {
         return new MusicInfo()
         {
-            Title = title, Aliases = aliases, Description = Description, Location = fileLocation, ByteSize = byteSize
+            Title       = title,
+            Aliases     = aliases,
+            Description = Description,
+            Location    = fileLocation,
+            ByteSize    = byteSize
         };
     }
-    
+
     public static Embed ToEmbed(this MusicInfo musicInfo, Color? embedColor = null)
     {
-        EmbedBuilder builder = new EmbedBuilder();
+        var builder = new EmbedBuilder();
         builder.Color = embedColor ?? Color.Default;
         builder.WithTitle(musicInfo.Title);
         builder.WithDescription(musicInfo.Description);
-        if(musicInfo.Aliases != null)
+        if (musicInfo.Aliases != null)
             builder.AddField("Aliases", string.Join(", ", musicInfo.Aliases));
-        else 
+        else
             builder.AddField("Aliases", "None");
         builder.AddField("Location", musicInfo.Location);
         builder.AddField("ByteSize", musicInfo.ByteSize);
         return builder.Build();
     }
-    
+
     public static Embed ToEmbed(this List<MusicInfo> musicInfo, Color? embedColor = null)
     {
-        EmbedBuilder builder = new EmbedBuilder();
+        var builder = new EmbedBuilder();
         builder.Color = embedColor ?? Color.Default;
         builder.WithTitle("Search results");
         builder.WithDescription("Found " + musicInfo.Count + " results");

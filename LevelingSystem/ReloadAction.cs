@@ -4,7 +4,7 @@ using PluginManager.Others;
 
 namespace LevelingSystem;
 
-public class ReloadAction : ICommandAction
+public class ReloadAction: ICommandAction
 {
     public string ActionName => "LevelingSystemReload";
     public string? Description => "Reloads the Leveling System config file";

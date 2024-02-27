@@ -3,7 +3,7 @@ using PluginManager.Others;
 
 namespace PythonCompatibilityLayer;
 
-public class ReloadVariables : ICommandAction
+public class ReloadVariables: ICommandAction
 {
     public string ActionName => "py_reloadvariables";
     public string? Description => "Reloads the variables from the variables.json file.";

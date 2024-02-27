@@ -4,13 +4,13 @@ using PluginManager.Interfaces;
 
 namespace MusicPlayer.SlashCommands;
 
-public class Skip : DBSlashCommand
+public class Skip: DBSlashCommand
 {
     public string Name => "skip";
     public string Description => "Skip the current melody";
     public bool canUseDM => false;
     public List<SlashCommandOptionBuilder> Options => null;
-    
+
     public async void ExecuteServer(SocketSlashCommand context)
     {
         if (Variables._MusicPlayer is null)
@@ -25,7 +25,7 @@ public class Skip : DBSlashCommand
             return;
         }
 
-        string? melodyTitle = Variables._MusicPlayer.CurrentlyPlaying.Title;
+        var melodyTitle = Variables._MusicPlayer.CurrentlyPlaying.Title;
 
         await context.RespondAsync($"Skipping {melodyTitle} ...");
         Variables._MusicPlayer.Skip();

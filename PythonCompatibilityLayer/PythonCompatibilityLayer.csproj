@@ -7,16 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="pythonnet" Version="3.0.1" />
+        <PackageReference Include="pythonnet" Version="3.0.1"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\SethDiscordBot\PluginManager\PluginManager.csproj" />
+        <ProjectReference Include="..\..\SethDiscordBot\PluginManager\PluginManager.csproj"/>
     </ItemGroup>
-
-
-
-
 
 
 </Project>

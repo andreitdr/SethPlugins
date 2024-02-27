@@ -7,19 +7,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\SethDiscordBot\PluginManager\PluginManager.csproj" />
+        <ProjectReference Include="..\..\SethDiscordBot\PluginManager\PluginManager.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Remove="libs\**" />
+        <Compile Remove="libs\**"/>
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Remove="libs\**" />
+        <EmbeddedResource Remove="libs\**"/>
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="libs\**" />
+        <None Remove="libs\**"/>
     </ItemGroup>
 
 </Project>

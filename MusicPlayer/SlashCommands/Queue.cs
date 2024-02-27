@@ -4,7 +4,7 @@ using PluginManager.Interfaces;
 
 namespace MusicPlayer.SlashCommands;
 
-public class Queue : DBSlashCommand
+public class Queue: DBSlashCommand
 {
     public string Name => "queue";
     public string Description => "Queue a melody to play";
@@ -26,17 +26,17 @@ public class Queue : DBSlashCommand
             return;
         }
 
-        EmbedBuilder builder = new EmbedBuilder()
+        var builder = new EmbedBuilder()
         {
-            Title = "Music Queue",
+            Title       = "Music Queue",
             Description = "Here is the current music queue",
-            Color = Color.Blue
+            Color       = Color.Blue
         };
-        
+
         if (Variables._MusicPlayer.CurrentlyPlaying != null)
             builder.AddField("Current music", Variables._MusicPlayer.CurrentlyPlaying.Title);
 
-        int i = 1;
+        var i = 1;
         foreach (var melody in Variables._MusicPlayer.MusicQueue)
         {
             builder.AddField($"#{i}", melody.Title);

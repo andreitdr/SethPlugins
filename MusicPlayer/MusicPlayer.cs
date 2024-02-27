@@ -9,7 +9,7 @@ namespace MusicPlayer;
 public class MusicPlayer
 {
     private static int defaultByteSize = 1024;
-    
+
     public Queue<MusicInfo> MusicQueue { get; private set; }
 
     public bool isPaused { get; private set; }
@@ -29,20 +29,20 @@ public class MusicPlayer
     {
         if (isQueueRunning)
         {
-            Config.Logger.Log("Another queue is running !", source: typeof(MusicPlayer), type: LogType.WARNING);
+            Config.Logger.Log("Another queue is running !", typeof(MusicPlayer), LogType.WARNING);
             return;
         }
-        
+
         if (Variables.audioClient is null)
         {
-            Config.Logger.Log("Audio Client is null", source: typeof(MusicPlayer), type: LogType.WARNING);
+            Config.Logger.Log("Audio Client is null", typeof(MusicPlayer), LogType.WARNING);
             return;
         }
-        
+
         isQueueRunning = true;
-        
-        
-        while (MusicQueue.TryDequeue(out MusicInfo? dequeuedMusic))
+
+
+        while (MusicQueue.TryDequeue(out var dequeuedMusic))
         {
             CurrentlyPlaying = dequeuedMusic;
             using (var dsAudioStream = Variables.audioClient.CreatePCMStream(AudioApplication.Mixed))
@@ -51,7 +51,7 @@ public class MusicPlayer
                 {
                     if (ffmpeg is null)
                     {
-                        Config.Logger.Log($"Failed to start ffmpeg process. FFMPEG is missing or the {CurrentlyPlaying.Location} has an invalid format.", source: typeof(MusicPlayer), type: LogType.ERROR);
+                        Config.Logger.Log($"Failed to start ffmpeg process. FFMPEG is missing or the {CurrentlyPlaying.Location} has an invalid format.", typeof(MusicPlayer), LogType.ERROR);
                         continue;
                     }
                     using (var ffmpegOut = ffmpeg.StandardOutput.BaseStream)
@@ -59,38 +59,38 @@ public class MusicPlayer
                         await PlayCurrentTrack(dsAudioStream, ffmpegOut, CurrentlyPlaying.ByteSize ?? defaultByteSize);
                     }
                 }
-                
+
             }
         }
-        isQueueRunning = false;
+        isQueueRunning   = false;
         CurrentlyPlaying = null;
     }
 
     public void Loop(int numberOfTimes)
     {
-        if(CurrentlyPlaying is null) return;
-        
-        Queue<MusicInfo> tempQueue = new Queue<MusicInfo>();
-        for (int i = 0; i < numberOfTimes; i++)
+        if (CurrentlyPlaying is null) return;
+
+        Queue<MusicInfo> tempQueue = new();
+        for (var i = 0; i < numberOfTimes; i++)
         {
             tempQueue.Enqueue(CurrentlyPlaying);
         }
-        
+
         foreach (var musicInfo in MusicQueue)
         {
             tempQueue.Enqueue(musicInfo);
         }
-        
-        this.MusicQueue = tempQueue;
+
+        MusicQueue = tempQueue;
     }
 
     public async Task PlayCurrentTrack(Stream DiscordVoiceChannelStream, Stream fileStreamFFMPEG, int byteSize)
     {
         if (isPlaying) return;
-        this.ByteSize = byteSize;
+        ByteSize = byteSize;
 
         isPlaying = true;
-        isPaused = false;
+        isPaused  = false;
 
         while (isPlaying)
         {
@@ -110,38 +110,38 @@ public class MusicPlayer
                 break;
             }
         }
-        
 
-        
+
+
         await DiscordVoiceChannelStream.FlushAsync();
         await fileStreamFFMPEG.FlushAsync();
 
         isPlaying = false;
-        isPaused = false;
+        isPaused  = false;
     }
 
     public void Pause()
     {
-        this.isPaused = true;
+        isPaused = true;
     }
 
     public void Unpause()
     {
-        this.isPaused = false;
+        isPaused = false;
     }
 
     public bool Enqueue(string musicName)
     {
-        MusicInfo? minfo = Variables._MusicDatabase.GetMusicInfo(musicName);
+        var minfo = Variables._MusicDatabase.GetMusicInfo(musicName);
         if (minfo is null) return false;
-        
+
         MusicQueue.Enqueue(minfo);
         return true;
     }
 
     public void Skip()
     {
-        this.isPlaying = false;
+        isPlaying = false;
     }
 
     public void SetVolume(float volume)
@@ -152,18 +152,19 @@ public class MusicPlayer
     private static Process? CreateStream(string path)
     {
         return Process.Start(new ProcessStartInfo
-        {
-            FileName = "ffmpeg", 
-            Arguments = $"-hide_banner -loglevel panic -i \"{path}\" -ac 2 -f s16le -ar 48000 pipe:1", 
-            UseShellExecute = false,
-            RedirectStandardOutput = true
-        });
+            {
+                FileName               = "ffmpeg",
+                Arguments              = $"-hide_banner -loglevel panic -i \"{path}\" -ac 2 -f s16le -ar 48000 pipe:1",
+                UseShellExecute        = false,
+                RedirectStandardOutput = true
+            }
+        );
     }
 
     public void Stop()
     {
-        this.MusicQueue.Clear();
-        this.isPlaying = false;
+        MusicQueue.Clear();
+        isPlaying = false;
     }
 
 }

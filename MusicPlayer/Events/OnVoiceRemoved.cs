@@ -6,10 +6,10 @@ using PluginManager.Others.Logger;
 
 namespace MusicPlayer.Events;
 
-public class OnVoiceRemoved : DBEvent
+public class OnVoiceRemoved: DBEvent
 {
 
-    public string Name        => "Event: OnVoiceRemoved";
+    public string Name => "Event: OnVoiceRemoved";
     public string Description => "Called when bot leaves a voice channel";
 
     public void Start(DiscordSocketClient client)
@@ -22,13 +22,13 @@ public class OnVoiceRemoved : DBEvent
                 Variables._MusicPlayer?.Skip();
                 Variables._MusicPlayer?.Stop();
                 await Variables.audioClient!.StopAsync();
-                Variables.audioClient = null;
+                Variables.audioClient  = null;
                 Variables._MusicPlayer = null;
-                
-                Config.Logger.Log("Bot left voice channel.", source: typeof(OnVoiceRemoved), type: LogType.INFO);
+
+                Config.Logger.Log("Bot left voice channel.", typeof(OnVoiceRemoved), LogType.INFO);
             }
-            
+
         };
     }
-    
+
 }
