@@ -9,6 +9,7 @@
     "DownLoadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/LevelingSystem/LevelingSystem.dll",
     "Description": "A simple leveling system for your server",
     "Dependencies": [],
+    "ScriptDependencies": [],
     "SupportedOS": 5,
     "HasDependencies": false
   },
@@ -21,6 +22,7 @@
     },
     "DownLoadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/MusicPlayer.dll",
     "Description": "A simple music player for your server",
+    "ScriptDependencies": [],
     "Dependencies": [
       {
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/ffmpeg.exe",
@@ -55,6 +57,7 @@
     },
     "DownLoadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/MusicPlayer.dll",
     "Description": "A simple music player for your server",
+    "ScriptDependencies": [],
     "Dependencies": [
       {
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/linux/ffmpeg",
