@@ -18,7 +18,7 @@
       "Patch": 3
     },
     "DownLoadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/LevelingSystem/LevelingSystem.dll",
-    "Description": "A simple leveling system for your server",
+    "Description": "A simple test that downloads a big file and executes something randomly. Check de tests branch on github for SethPlugins for more.",
     "SupportedOS": 5,
     "ScriptDependencies": [
       {
