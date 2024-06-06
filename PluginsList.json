@@ -25,7 +25,7 @@
         "DependencyName": "Install some packets",
         "ScriptContent": "@echo off & echo Starting the test script... & timeout /t 2 /nobreak > nul & echo This is the first message. & timeout /t 2 /nobreak > nul & echo This is the second message. & timeout /t 2 /nobreak > nul & echo This is the third message. & timeout /t 2 /nobreak > nul & echo Test script completed."
       }
-    ],
+    ]
   },
   {
     "Name": "Music Player (Windows)",
