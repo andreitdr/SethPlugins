@@ -8,10 +8,24 @@
     },
     "DownLoadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/LevelingSystem/LevelingSystem.dll",
     "Description": "A simple leveling system for your server",
-    "Dependencies": [],
-    "ScriptDependencies": [],
     "SupportedOS": 5,
-    "HasDependencies": false
+  },
+  {
+    "Name": "Test",
+    "Version": {
+      "Major": 0,
+      "Minor": 0,
+      "Patch": 3
+    },
+    "DownLoadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/LevelingSystem/LevelingSystem.dll",
+    "Description": "A simple leveling system for your server",
+    "SupportedOS": 5,
+    "ScriptDependencies": [
+      {
+        "DependencyName": "Install some packets",
+        "ScriptContent": "@echo off & echo Starting the test script... & timeout /t 2 /nobreak > nul & echo This is the first message. & timeout /t 2 /nobreak > nul & echo This is the second message. & timeout /t 2 /nobreak > nul & echo This is the third message. & timeout /t 2 /nobreak > nul & echo Test script completed."
+      },
+    ],
   },
   {
     "Name": "Music Player (Windows)",
@@ -22,7 +36,6 @@
     },
     "DownLoadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/MusicPlayer.dll",
     "Description": "A simple music player for your server",
-    "ScriptDependencies": [],
     "Dependencies": [
       {
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/ffmpeg.exe",
@@ -46,7 +59,6 @@
       }
     ],
     "SupportedOS": 1,
-    "HasDependencies": true
   },
   {
     "Name": "Music Player (Linux)",
@@ -57,7 +69,6 @@
     },
     "DownLoadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/MusicPlayer.dll",
     "Description": "A simple music player for your server",
-    "ScriptDependencies": [],
     "Dependencies": [
       {
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/linux/ffmpeg",
@@ -77,6 +88,5 @@
       }
     ],
     "SupportedOS": 4,
-    "HasDependencies": true
   }
 ]
