@@ -8,7 +8,7 @@
     },
     "DownLoadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/LevelingSystem/LevelingSystem.dll",
     "Description": "A simple leveling system for your server",
-    "SupportedOS": 5,
+    "SupportedOS": 5
   },
   {
     "Name": "Test",
@@ -58,7 +58,7 @@
         "DownloadLocation": "yt-dlp.exe"
       }
     ],
-    "SupportedOS": 1,
+    "SupportedOS": 1
   },
   {
     "Name": "Music Player (Linux)",
@@ -87,6 +87,6 @@
         "DownloadLocation": "yt-dlp"
       }
     ],
-    "SupportedOS": 4,
+    "SupportedOS": 4
   }
 ]
