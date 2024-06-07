@@ -38,22 +38,27 @@
     "Description": "A simple music player for your server",
     "Dependencies": [
       {
+	"DependencyName": "FFMPEG",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/ffmpeg.exe",
         "DownloadLocation": "ffmpeg.exe"
       },
       {
+	"DependencyName": "libopus",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/libopus.dll",
         "DownloadLocation": "libopus.dll"
       },
       {
+	"DependencyName": "libsodium",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/libsodium.dll",
         "DownloadLocation": "libsodium.dll"
       },
       {
+	"DependencyName": "opus",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/opus.dll",
         "DownloadLocation": "opus.dll"
       },
       {
+	"DependencyName": "yt-dlp",
         "DownloadLink": "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_x86.exe",
         "DownloadLocation": "yt-dlp.exe"
       }
@@ -71,18 +76,22 @@
     "Description": "A simple music player for your server",
     "Dependencies": [
       {
+	"DependencyName": "FFMPEG",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/linux/ffmpeg",
         "DownloadLocation": "ffmpeg"
       },
       {
+	"DependencyName": "libopus",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/linux/libopus.so",
         "DownloadLocation": "libopus.so"
       },
       {
+	"DependencyName": "libsodium",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/linux/libsodium.so",
         "DownloadLocation": "libsodium.so"
       },
       {
+	"DependencyName": "yt-dlp",
         "DownloadLink": "https://github.com/yt-dlp/yt-dlp/releases/download/2023.10.13/yt-dlp",
         "DownloadLocation": "yt-dlp"
       }
