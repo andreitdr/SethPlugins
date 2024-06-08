@@ -1,7 +1,9 @@
 using Discord;
-using PluginManager.Interfaces;
-using PluginManager.Online;
-using PluginManager.Others;
+
+using DiscordBotCore;
+using DiscordBotCore.Interfaces;
+using DiscordBotCore.Online;
+using DiscordBotCore.Others;
 
 namespace MusicPlayer.Commands;
 
@@ -66,8 +68,9 @@ public class AddMelody: DBCommand
 
         IProgress<float> downloadProgress = new Progress<float>();
 
-        var location = Functions.dataFolder + $"Music/Melodies/{title}.mp3";
-        Directory.CreateDirectory(Functions.dataFolder + "Music/Melodies");
+        
+        var location = Application.GetResourceFullPath($"Music/Melodies/{title}.mp3");
+        Directory.CreateDirectory(Application.GetResourceFullPath("Music/Melodies"));
         await ServerCom.DownloadFileAsync(file.Url, location, downloadProgress);
 
         Console.WriteLine($"Done. Saved at {location}");

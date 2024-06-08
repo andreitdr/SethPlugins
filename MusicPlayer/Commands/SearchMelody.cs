@@ -1,6 +1,6 @@
 ﻿using Discord;
-using PluginManager.Interfaces;
-using PluginManager.Others;
+using DiscordBotCore.Interfaces;
+using DiscordBotCore.Others;
 
 namespace MusicPlayer.Commands;
 

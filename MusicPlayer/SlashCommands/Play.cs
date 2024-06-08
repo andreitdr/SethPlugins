@@ -1,9 +1,9 @@
 using Discord;
-using Discord.Audio;
 using Discord.WebSocket;
-using PluginManager;
-using PluginManager.Interfaces;
-using PluginManager.Others;
+
+using DiscordBotCore;
+using DiscordBotCore.Interfaces;
+using DiscordBotCore.Others;
 
 namespace MusicPlayer.SlashCommands;
 
@@ -12,6 +12,7 @@ public class Play: DBSlashCommand
     public string Name => "play";
     public string Description => "Play music command";
     public bool canUseDM => false;
+    public bool HasInteraction => false;
 
     public List<SlashCommandOptionBuilder> Options => new()
     {
@@ -23,6 +24,8 @@ public class Play: DBSlashCommand
             Type        = ApplicationCommandOptionType.String
         }
     };
+
+    
 
     public async void ExecuteServer(SocketSlashCommand context)
     {
@@ -45,7 +48,7 @@ public class Play: DBSlashCommand
         if (user is null)
         {
             await context.RespondAsync("Failed to get user data from channel ! Check error log at " + DateTime.Now.ToLongTimeString());
-            Config.Logger.Log("User is null while trying to convert from context.User to IGuildUser.", typeof(Play), LogType.ERROR);
+            Application.CurrentApplication.Logger.Log("User is null while trying to convert from context.User to IGuildUser.", typeof(Play), LogType.ERROR);
             return;
         }
 

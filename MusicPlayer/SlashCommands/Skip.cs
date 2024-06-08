@@ -1,6 +1,6 @@
 ﻿using Discord;
 using Discord.WebSocket;
-using PluginManager.Interfaces;
+using DiscordBotCore.Interfaces;
 
 namespace MusicPlayer.SlashCommands;
 
@@ -9,6 +9,7 @@ public class Skip: DBSlashCommand
     public string Name => "skip";
     public string Description => "Skip the current melody";
     public bool canUseDM => false;
+    public bool HasInteraction => false;
     public List<SlashCommandOptionBuilder> Options => null;
 
     public async void ExecuteServer(SocketSlashCommand context)

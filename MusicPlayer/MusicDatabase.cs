@@ -1,6 +1,4 @@
-using System.Security.Cryptography;
-using PluginManager;
-using PluginManager.Others;
+using DiscordBotCore.Others;
 
 namespace MusicPlayer;
 
@@ -27,7 +25,7 @@ public class MusicDatabase: SettingsDictionary<string, MusicInfo>
     /// <returns></returns>
     public MusicInfo? GetMusicInfo(string searchQuery)
     {
-        return this.FirstOrDefault(kvp => kvp.Key.Contains(searchQuery, StringComparison.InvariantCultureIgnoreCase) ||
+        return FirstOrDefault(kvp => kvp.Key.Contains(searchQuery, StringComparison.InvariantCultureIgnoreCase) ||
                                           kvp.Value.Aliases.Any(alias => alias.Contains(searchQuery, StringComparison.InvariantCultureIgnoreCase))
         ).Value;
     }

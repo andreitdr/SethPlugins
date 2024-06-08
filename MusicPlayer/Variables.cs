@@ -1,5 +1,4 @@
 using Discord.Audio;
-using PluginManager.Others;
 
 namespace MusicPlayer;
 

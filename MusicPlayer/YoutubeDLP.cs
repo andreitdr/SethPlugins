@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using PluginManager.Others;
 
 namespace MusicPlayer;
 
@@ -9,8 +8,8 @@ public class YoutubeDLP
     {
         Console.WriteLine("Downloading melody: " + url);
         var process = new Process();
-        process.StartInfo.FileName  = "./yt-dlp";
-        process.StartInfo.Arguments = $"-x --force-overwrites -o \"{Functions.dataFolder}Music/Melodies/%(title)s.%(ext)s\" --audio-format mp3 {url}";
+        process.StartInfo.FileName  = await DiscordBotCore.Application.CurrentApplication.PluginManager.GetDependencyLocation("yt-dlp");
+        process.StartInfo.Arguments = $"-x --force-overwrites -o \"{DiscordBotCore.Application.GetResourceFullPath("/Music/Melodies")}/%(title)s.%(ext)s\" --audio-format mp3 {url}";
 
         process.StartInfo.RedirectStandardOutput = true;
         var title = "";

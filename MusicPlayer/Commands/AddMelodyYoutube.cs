@@ -1,6 +1,8 @@
 using System.Diagnostics;
-using PluginManager.Interfaces;
-using PluginManager.Others;
+
+using DiscordBotCore;
+using DiscordBotCore.Interfaces;
+using DiscordBotCore.Others;
 
 namespace MusicPlayer.Commands;
 
@@ -62,7 +64,7 @@ public class AddMelodyYoutube: DBCommand
                 Aliases     = aliases,
                 ByteSize    = 1024,
                 Description = "Melody added from youtube link",
-                Location    = $"{Functions.dataFolder}Music/Melodies/{title}.mp3",
+                Location    = Application.GetResourceFullPath($"Music/Melodies/{title}.mp3"),
                 Title       = title
             }
         );

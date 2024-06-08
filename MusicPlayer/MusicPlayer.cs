@@ -1,8 +1,8 @@
 using System.Diagnostics;
 using Discord.Audio;
-using PluginManager;
-using PluginManager.Others;
-using PluginManager.Others.Logger;
+
+using DiscordBotCore;
+using DiscordBotCore.Others;
 
 namespace MusicPlayer;
 
@@ -29,29 +29,34 @@ public class MusicPlayer
     {
         if (isQueueRunning)
         {
-            Config.Logger.Log("Another queue is running !", typeof(MusicPlayer), LogType.WARNING);
+            Application.CurrentApplication.Logger.Log("Another queue is running !", typeof(MusicPlayer), LogType.WARNING);
             return;
         }
 
         if (Variables.audioClient is null)
         {
-            Config.Logger.Log("Audio Client is null", typeof(MusicPlayer), LogType.WARNING);
+            Application.CurrentApplication.Logger.Log("Audio Client is null", typeof(MusicPlayer), LogType.WARNING);
             return;
         }
 
         isQueueRunning = true;
 
+        string ffmpegPath = await Application.CurrentApplication.PluginManager.GetDependencyLocation("FFMPEG");
+        ffmpegPath = ffmpegPath.Replace("\\", "/");
+        ffmpegPath = Path.GetFullPath(ffmpegPath);
+
+        Console.WriteLine("FFMPEG Path: " + ffmpegPath);
 
         while (MusicQueue.TryDequeue(out var dequeuedMusic))
         {
             CurrentlyPlaying = dequeuedMusic;
             using (var dsAudioStream = Variables.audioClient.CreatePCMStream(AudioApplication.Mixed))
             {
-                using (var ffmpeg = CreateStream(CurrentlyPlaying.Location))
+                using (var ffmpeg = CreateStream(ffmpegPath, CurrentlyPlaying.Location))
                 {
                     if (ffmpeg is null)
                     {
-                        Config.Logger.Log($"Failed to start ffmpeg process. FFMPEG is missing or the {CurrentlyPlaying.Location} has an invalid format.", typeof(MusicPlayer), LogType.ERROR);
+                        Application.CurrentApplication.Logger.Log($"Failed to start ffmpeg process. FFMPEG is missing or the {CurrentlyPlaying.Location} has an invalid format.", typeof(MusicPlayer), LogType.ERROR);
                         continue;
                     }
                     using (var ffmpegOut = ffmpeg.StandardOutput.BaseStream)
@@ -106,7 +111,7 @@ public class MusicPlayer
             }
             catch (Exception ex)
             {
-                Config.Logger.Log(ex, source: typeof(MusicPlayer));
+                Application.CurrentApplication.Logger.LogException(ex, this);
                 break;
             }
         }
@@ -149,11 +154,11 @@ public class MusicPlayer
         // set volume
     }
 
-    private static Process? CreateStream(string path)
+    private static Process? CreateStream(string fileName, string path)
     {
         return Process.Start(new ProcessStartInfo
             {
-                FileName               = "ffmpeg",
+                FileName               = fileName,
                 Arguments              = $"-hide_banner -loglevel panic -i \"{path}\" -ac 2 -f s16le -ar 48000 pipe:1",
                 UseShellExecute        = false,
                 RedirectStandardOutput = true

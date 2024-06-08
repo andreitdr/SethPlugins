@@ -1,8 +1,7 @@
 ﻿using Discord.WebSocket;
-using PluginManager;
-using PluginManager.Interfaces;
-using PluginManager.Others;
-using PluginManager.Others.Logger;
+using DiscordBotCore;
+using DiscordBotCore.Interfaces;
+using DiscordBotCore.Others;
 
 namespace MusicPlayer.Events;
 
@@ -11,6 +10,8 @@ public class OnVoiceRemoved: DBEvent
 
     public string Name => "Event: OnVoiceRemoved";
     public string Description => "Called when bot leaves a voice channel";
+
+    public bool RequireOtherThread => false;
 
     public void Start(DiscordSocketClient client)
     {
@@ -25,7 +26,7 @@ public class OnVoiceRemoved: DBEvent
                 Variables.audioClient  = null;
                 Variables._MusicPlayer = null;
 
-                Config.Logger.Log("Bot left voice channel.", typeof(OnVoiceRemoved), LogType.INFO);
+                Application.CurrentApplication.Logger.Log("Bot left voice channel.", this, LogType.INFO);
             }
 
         };

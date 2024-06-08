@@ -1,6 +1,4 @@
-using System.Runtime.CompilerServices;
 using Discord;
-using PluginManager.Others;
 
 namespace MusicPlayer;
 

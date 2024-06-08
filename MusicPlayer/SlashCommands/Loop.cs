@@ -1,6 +1,6 @@
 ﻿using Discord;
 using Discord.WebSocket;
-using PluginManager.Interfaces;
+using DiscordBotCore.Interfaces;
 
 namespace MusicPlayer.SlashCommands;
 
@@ -10,6 +10,7 @@ public class Loop: DBSlashCommand
     public string Name => "loop";
     public string Description => "Loop the current song for a certain amount of times. If no times are specified, it will loop once";
     public bool canUseDM => false;
+    public bool HasInteraction => false;
 
     public List<SlashCommandOptionBuilder> Options => new()
     {
@@ -21,6 +22,7 @@ public class Loop: DBSlashCommand
             IsRequired  = false
         }
     };
+
 
     public void ExecuteServer(SocketSlashCommand context)
     {
