@@ -1,16 +1,18 @@
 ﻿using Discord.WebSocket;
-using PluginManager;
-using PluginManager.Database;
-using PluginManager.Interfaces;
+
+using DiscordBotCore;
+using DiscordBotCore.Database;
+using DiscordBotCore.Interfaces;
 using static LevelingSystem.Variables;
 
 namespace LevelingSystem;
 
-internal class LevelEvent: DBEvent
+internal class LevelEvent : DBEvent
 {
     public string Name => "Leveling System Event Handler";
     public string Description => "The Leveling System Event Handler";
 
+    public bool RequireOtherThread => false;
 
     public async void Start(DiscordSocketClient client)
     {
@@ -29,10 +31,10 @@ internal class LevelEvent: DBEvent
                 MaxEXP                       = 7,
                 MinEXP                       = 1
             };
-            await JsonManager.SaveToJsonFile(dataFolder + "Settings.txt", globalSettings);
+            await DiscordBotCore.Others.JsonManager.SaveToJsonFile(dataFolder + "Settings.txt", globalSettings);
         }
         else
-            globalSettings = await JsonManager.ConvertFromJson<Settings>(dataFolder + "Settings.txt");
+            globalSettings = await DiscordBotCore.Others.JsonManager.ConvertFromJson<Settings>(dataFolder + "Settings.txt");
 
         if (!await database.TableExistsAsync("Levels"))
             await database.CreateTableAsync("Levels", "UserID VARCHAR(128)", "Level INT", "EXP INT");
@@ -47,7 +49,7 @@ internal class LevelEvent: DBEvent
 
     private async Task ClientOnMessageReceived(SocketMessage arg)
     {
-        if (arg.Author.IsBot || arg.IsTTS || arg.Content.StartsWith(Config.AppSettings["prefix"]))
+        if (arg.Author.IsBot || arg.IsTTS || arg.Content.StartsWith(Application.CurrentApplication.ApplicationEnvironmentVariables["prefix"]))
             return;
 
         if (waitingList.ContainsKey(arg.Author.Id) && waitingList[arg.Author.Id] > DateTime.Now.AddSeconds(-globalSettings.SecondsToWaitBetweenMessages))

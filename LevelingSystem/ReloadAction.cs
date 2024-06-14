@@ -1,6 +1,6 @@
-﻿using PluginManager;
-using PluginManager.Interfaces;
-using PluginManager.Others;
+﻿using DiscordBotCore.Interfaces;
+using DiscordBotCore.Others;
+using DiscordBotCore.Others.Actions;
 
 namespace LevelingSystem;
 
@@ -10,9 +10,11 @@ public class ReloadAction: ICommandAction
     public string? Description => "Reloads the Leveling System config file";
     public string? Usage => "LevelingSystemReload";
     public InternalActionRunType RunType => InternalActionRunType.ON_CALL;
-    public Task Execute(string[]? args)
+
+    public IEnumerable<InternalActionOption> ListOfOptions => [];
+
+    public async Task Execute(string[]? args)
     {
-        Variables.globalSettings = JsonManager.ConvertFromJson<Settings>(Variables.dataFolder + "Settings.txt").Result;
-        return Task.CompletedTask;
+        Variables.globalSettings = await JsonManager.ConvertFromJson<Settings>(Variables.dataFolder + "Settings.txt");
     }
 }

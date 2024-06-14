@@ -1,7 +1,8 @@
 ﻿using Discord;
-using Discord.Commands;
-using PluginManager.Interfaces;
-using PluginManager.Others;
+
+using DiscordBotCore;
+using DiscordBotCore.Interfaces;
+using DiscordBotCore.Others;
 
 namespace LevelingSystem;
 
@@ -9,10 +10,7 @@ internal class LevelCommand: DBCommand
 {
     public string Command => "level";
 
-    public List<string> Aliases => new()
-    {
-        "lvl"
-    };
+    public List<string> Aliases => ["lvl", "rank"];
 
     public string Description => "Display tour current level";
 
@@ -22,7 +20,17 @@ internal class LevelCommand: DBCommand
 
     public async void ExecuteServer(DbCommandExecutingArguments args)
     {
-        object[] user = await Variables.database.ReadDataArrayAsync($"SELECT * FROM Levels WHERE UserID='{args.context.Message.Author.Id}'");
+        if(Variables.database is null)
+        {
+            Application.CurrentApplication.Logger.Log("Database is not initialized", this, LogType.WARNING);
+            return;
+        }
+
+
+        object[]? user = await Variables.database.ReadDataArrayAsync($"SELECT * FROM Levels WHERE UserID=@userId",
+                               new KeyValuePair<string, object>("userId", args.context.Message.Author.Id));
+
+
         if (user is null)
         {
             await args.context.Channel.SendMessageAsync("You are now unranked !");
