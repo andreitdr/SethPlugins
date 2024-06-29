@@ -2,7 +2,7 @@
 
 namespace CppWrapper.Objects
 {
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)] // can use ANSI also
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
     public struct ApplicationStruct
     {
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 19)]
@@ -13,13 +13,6 @@ namespace CppWrapper.Objects
 
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 71)]
         public string Token;
-
-        public ApplicationStruct(string serverId, string prefix, string token)
-        {
-            ServerId = serverId;
-            Prefix = prefix;
-            Token = token;
-        }
     }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]

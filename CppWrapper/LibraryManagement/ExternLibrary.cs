@@ -1,10 +1,9 @@
 ﻿using System.Runtime.InteropServices;
-using CppWrapper.Functions;
 using DiscordBotCore;
 
 namespace CppWrapper.LibraryManagement
 {
-    internal sealed class ExternLibrary
+    public sealed class ExternLibrary
     {
         public string LibraryPath { get; init; }
         public IntPtr LibraryHandle { get; private set; }
@@ -96,10 +95,11 @@ namespace CppWrapper.LibraryManagement
         /// <param name="setterExternFunctionName">The setter function name</param>
         /// <param name="executableFunction">The function that the C++ setter will make its internal function to point to</param>
         /// <typeparam name="ExecuteDelegate">A delegate that reflects the executable function structure</typeparam>
+        /// <typeparam name="SetDelegate">The Setter delegate </typeparam>
         /// <returns>A response if it exists as an object</returns>
-        public object? SetExternFunctionSetterPointerToCustomDelegate<ExecuteDelegate>(string setterExternFunctionName, ExecuteDelegate executableFunction) where ExecuteDelegate : Delegate
+        public object? SetExternFunctionSetterPointerToCustomDelegate<SetDelegate, ExecuteDelegate>(string setterExternFunctionName, ExecuteDelegate executableFunction) where ExecuteDelegate : Delegate where SetDelegate : Delegate
         {
-            Delegates.SetCsharpFunctionPointerDelegate setterDelegate        = GetDelegateForFunctionPointer<Delegates.SetCsharpFunctionPointerDelegate>(setterExternFunctionName);
+            SetDelegate setterDelegate        = GetDelegateForFunctionPointer<SetDelegate>(setterExternFunctionName);
             IntPtr                                     executableFunctionPtr = GetFunctionPointerForDelegate(executableFunction);
 
             var result = setterDelegate.DynamicInvoke(executableFunctionPtr);

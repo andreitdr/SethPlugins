@@ -2,7 +2,7 @@
 
 using CppWrapper.Objects;
 
-namespace CppWrapper.Functions
+namespace DiscordBotUI
 {
     public abstract class Delegates
     {
