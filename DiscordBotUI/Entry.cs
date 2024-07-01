@@ -25,7 +25,7 @@ public class Entry : ICommandAction
     {
         try{
         
-            string appUiComponent = await Application.CurrentApplication.PluginManager.GetDependencyLocation("AppUI") ?? "./Data/Test/AppUiDll.dll";
+            string appUiComponent = "./Data/Test/libtestlib.dll";
 
             ExternLibrary externalLibrary = new ExternLibrary(appUiComponent);
             externalLibrary.InitializeLibrary();
