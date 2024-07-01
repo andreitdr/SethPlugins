@@ -20,6 +20,17 @@
     "DownLoadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/LevelingSystem/LevelingSystem.dll",
     "Description": "A simple test that downloads a big file and executes something randomly. Check de tests branch on github for SethPlugins for more.",
     "SupportedOS": 5,
+    "Dependencies": [
+      {
+	"DependencyName": "FFMPEG",
+        "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/ffmpeg.exe",
+        "DownloadLocation": "ffmpeg.exe"
+      },
+      {
+        "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/libopus.dll",
+        "DownloadLocation": "libopus.dll"
+      }
+    ],
     "ScriptDependencies": [
       {
         "DependencyName": "Install some packets",
