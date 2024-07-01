@@ -54,24 +54,32 @@
       {
 	"DependencyName": "FFMPEG",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/ffmpeg.exe",
-        "DownloadLocation": "ffmpeg.exe"
+        "DownloadLocation": "ffmpeg.exe",
+	"IsExecutable": true
       },
       {
+	"DependencyName": "libopus",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/libopus.dll",
-        "DownloadLocation": "libopus.dll"
+        "DownloadLocation": "libopus.dll",
+	"IsExecutable": false
       },
       {
+	"DependencyName": "libsodium",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/libsodium.dll",
-        "DownloadLocation": "libsodium.dll"
+        "DownloadLocation": "libsodium.dll",
+	"IsExecutable": false
       },
       {
+	"DependencyName": "opus",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/opus.dll",
-        "DownloadLocation": "opus.dll"
+        "DownloadLocation": "opus.dll",
+	"IsExecutable": false
       },
       {
 	"DependencyName": "yt-dlp",
         "DownloadLink": "https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp_x86.exe",
-        "DownloadLocation": "yt-dlp.exe"
+        "DownloadLocation": "yt-dlp.exe",
+	"IsExecutable": false
       }
     ],
     "SupportedOS": 1
@@ -89,22 +97,26 @@
       {
 	"DependencyName": "FFMPEG",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/linux/ffmpeg",
-        "DownloadLocation": "ffmpeg"
+        "DownloadLocation": "ffmpeg",
+	"IsExecutable": true
       },
       {
 	"DependencyName": "libopus",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/linux/libopus.so",
-        "DownloadLocation": "libopus.so"
+        "DownloadLocation": "libopus.so",
+	"IsExecutable": false
       },
       {
 	"DependencyName": "libsodium",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/linux/libsodium.so",
-        "DownloadLocation": "libsodium.so"
+        "DownloadLocation": "libsodium.so",
+	"IsExecutable": false
       },
       {
 	"DependencyName": "yt-dlp",
         "DownloadLink": "https://github.com/yt-dlp/yt-dlp/releases/download/2023.10.13/yt-dlp",
-        "DownloadLocation": "yt-dlp"
+        "DownloadLocation": "yt-dlp",
+	"IsExecutable": true
       }
     ],
     "SupportedOS": 4
