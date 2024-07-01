@@ -24,11 +24,14 @@
       {
 	"DependencyName": "FFMPEG",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/ffmpeg.exe",
-        "DownloadLocation": "ffmpeg.exe"
+        "DownloadLocation": "ffmpeg.exe",
+	"IsExecutable": true
       },
       {
+	"DependencyName": "libopus",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/libopus.dll",
-        "DownloadLocation": "libopus.dll"
+        "DownloadLocation": "libopus.dll",
+	"IsExecutable": false
       }
     ],
     "ScriptDependencies": [
