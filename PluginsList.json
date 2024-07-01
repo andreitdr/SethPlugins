@@ -43,17 +43,14 @@
         "DownloadLocation": "ffmpeg.exe"
       },
       {
-	"DependencyName": "libopus",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/libopus.dll",
         "DownloadLocation": "libopus.dll"
       },
       {
-	"DependencyName": "libsodium",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/libsodium.dll",
         "DownloadLocation": "libsodium.dll"
       },
       {
-	"DependencyName": "opus",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/windows/opus.dll",
         "DownloadLocation": "opus.dll"
       },
