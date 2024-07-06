@@ -97,7 +97,7 @@
       {
 	"DependencyName": "FFMPEG",
         "DownloadLink": "https://github.com/andreitdr/SethPlugins/raw/releases/MusicPlayer/libs/linux/ffmpeg",
-        "DownloadLocation": "ffmpeg",
+        "DownloadLocation": "comp/ffmpeg",
 	"IsExecutable": true
       },
       {
