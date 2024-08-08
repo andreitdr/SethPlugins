@@ -1,8 +1,8 @@
 [
   {
     "ModuleName": "LoggerModule",
-    "ModuleDownloadUrl": "https://",
-    "ModuleDescription": "Desc",
+    "ModuleDownloadUrl": "https://raw.githubusercontent.com/andreitdr/SethPlugins/tests/Modules/LoggerModule.dll",
+    "ModuleDescription": "The default logger module created by the SethDiscordBot developer.",
     "ModuleAuthor": "Wizzy",
     "ModuleType": 0
   }
