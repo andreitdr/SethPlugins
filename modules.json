@@ -1,9 +1,9 @@
 [
   {
     "ModuleName": "LoggerModule",
-    "ModuleDownloadUrl": "https://raw.githubusercontent.com/andreitdr/SethPlugins/tests/Modules/LoggerModule.dll",
-    "ModuleDescription": "The official logger module",
+    "ModuleDownloadUrl": "https://",
+    "ModuleDescription": "Desc",
     "ModuleAuthor": "Wizzy",
-    "ModuleType": "Logger"
+    "ModuleType": 0
   }
 ]
